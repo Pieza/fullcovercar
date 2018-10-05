@@ -61,34 +61,79 @@
 	<!-- ****************************** Gallery Section ************************** -->
 
 	<section id="gallery" class="block">
-			<div id="myCarousel" class="carousel slide" data-interval="3000" data-ride="carousel">
-					<!-- Carousel indicators -->
-					<ol class="carousel-indicators">
-						<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-						<li data-target="#myCarousel" data-slide-to="1"></li>
-						<li data-target="#myCarousel" data-slide-to="2"></li>
-					</ol>   
-					<!-- Carousel items -->
-					<div class="carousel-inner">
-						<div class="item active imgBox">
-							<a href="https://upload.wikimedia.org/wikipedia/commons/6/63/Monarch_In_May.jpg" class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/6/63/Monarch_In_May.jpg" /></a>
-						</div>
-						<div class="item imgBox">
-							<a href="https://upload.wikimedia.org/wikipedia/commons/6/63/Monarch_In_May.jpg" class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/6/63/Monarch_In_May.jpg" /></a>
-						</div>
-						<div class="item imgBox">
-							<a href="https://upload.wikimedia.org/wikipedia/commons/6/63/Monarch_In_May.jpg" class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/6/63/Monarch_In_May.jpg" /></a>
-						</div>
-					</div>
-					<!-- Carousel nav -->
-					<a class="carousel-control left" href="#myCarousel" data-slide="prev">
-						<span class="glyphicon glyphicon-chevron-left"></span>
-					</a>
-					<a class="carousel-control right" href="#myCarousel" data-slide="next">
-						<span class="glyphicon glyphicon-chevron-right"></span>
-					</a>
-				</div>
+		<section class="row">
+			<div class="title-box" style="color:#fff;"><h1 class="block-title wow animated rollIn">
+			<span class="bb-top-left" style="border-color: #fff; "></span>
+			<span class="bb-bottom-left" style="border-color: #fff; "></span>
+			Galería
+			<span class="bb-top-right" style="border-color: #fff; "></span>
+			<span class="bb-bottom-right" style="border-color: #fff; "></span>
+			</h1></div>
 		</section>
+		<section class="row">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+					<div class="carousel slide multi-item-carousel" id="theCarousel">
+						<div class="carousel-inner">
+						<div class="item active">
+							<div class="col-xs-4">
+							<a href="assets/img/galery/1.jpg" class="thumb">
+								<img src="assets/img/galery/1.jpg" class="img-responsive"/>
+							</a>
+							</div>
+						</div>
+						<div class="item">
+							<div class="col-xs-4">
+							<a href="assets/img/galery/2.jpg" class="thumb">
+								<img src="assets/img/galery/2.jpg" class="img-responsive"/>
+							</a>
+							</div>
+						</div>
+						<div class="item">
+							<div class="col-xs-4">
+							<a href="assets/img/galery/3.jpg" class="thumb">
+								<img src="assets/img/galery/3.jpg" class="img-responsive"/>
+							</a>
+							</div>
+						</div>
+						<div class="item">
+							<div class="col-xs-4">
+							<a href="assets/img/galery/4.jpg" class="thumb">
+								<img src="assets/img/galery/4.jpg" class="img-responsive"/>
+							</a>
+							</div>
+						</div>
+						<div class="item">
+							<div class="col-xs-4">
+							<a href="assets/img/galery/5.jpg" class="thumb">
+								<img src="assets/img/galery/5.jpg" class="img-responsive"/>
+							</a>
+							</div>
+						</div>
+						<div class="item">
+							<div class="col-xs-4">
+							<a href="assets/img/galery/6.jpg" class="thumb">
+								<img src="assets/img/galery/6.jpg" class="img-responsive"/>
+							</a>
+							</div>
+						</div>						
+						<div class="item">
+							<div class="col-xs-4">
+							<a href="assets/img/galery/7.jpg" class="thumb">
+								<img src="assets/img/galery/7.jpg" class="img-responsive"/>
+							</a>
+							</div>
+						</div>					
+						</div>
+						<a class="left carousel-control" href="#theCarousel" data-slide="prev"><i class="ion-ios-arrow-back" ></i></a>
+						<a class="right carousel-control" href="#theCarousel" data-slide="next"><i class="ion-ios-arrow-right"></i></a>
+					</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</section>
 
 				
 				
@@ -96,8 +141,7 @@
 				
 				
 		<div class="photo-overlay">
-
-				<div class="close-photo-overlay"><i class="fa fa-times"></i>
+				<div class="close-photo-overlay" style="font-size:50px"><i class="ion-ios-close-outline"></i>
 				
 				</div>
 			</div>	
@@ -118,6 +162,26 @@
 	<script>
 
 			$(document).ready(function() {
+				// Instantiate the Bootstrap carousel
+$('.multi-item-carousel').carousel({
+  interval: 4000
+});
+
+// for every slide in carousel, copy the next slide's item in the slide.
+// Do the same for the next, next item.
+$('.multi-item-carousel .item').each(function(){
+  var next = $(this).next();
+  if (!next.length) {
+    next = $(this).siblings(':first');
+  }
+  next.children(':first-child').clone().appendTo($(this));
+  
+  if (next.next().length>0) {
+    next.next().children(':first-child').clone().appendTo($(this));
+  } else {
+  	$(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+  }
+});
 			
 			$('.photo-overlay').hide();
 			
@@ -136,36 +200,16 @@
 			$('.photo-overlay').hide();                                                                                                    
 			
 			});
-			
+
+			$(".right").click(function(){
+				$(".multi-item-carousel").carousel('next');
 			});
-			$('#myCarousel').on('slide.bs.carousel', function (e) {
-
-  
-var $e = $(e.relatedTarget);
-var idx = $e.index();
-var itemsPerSlide = 4;
-var totalItems = $('.carousel-item').length;
-
-if (idx >= totalItems-(itemsPerSlide-1)) {
-	var it = itemsPerSlide - (totalItems - idx);
-	for (var i=0; i<it; i++) {
-		// append slides to end
-		if (e.direction=="left") {
-			$('.carousel-item').eq(i).appendTo('.carousel-inner');
-		}
-		else {
-			$('.carousel-item').eq(0).appendTo('.carousel-inner');
-		}
-	}
-}
-});
+			$(".left").click(function(){
+				$(".multi-item-carousel").carousel('prev');
+			});
 
 
-$('#myCarousel').carousel({ 
-			interval: 5000
-	});
-
-
+			});
 
 			</script>
 	
