@@ -1,6 +1,26 @@
 // Preloader //
 
-jQuery(document).ready(function($) {  
+jQuery(document).ready(function($) { 
+
+    $("#send").click(function(){
+    	var name = $('#name').val();
+    	var email = $('#email').val();
+    	var phone = $('#phone').val();
+    	var message = $('#message').val();
+    	if (name!=="" && email!=="" &&  phone!=="" && message!=="") { 
+    		 var xhttp = new XMLHttpRequest(); 
+    		 xhttp.onreadystatechange = function() {
+			    if (this.readyState == 4 && this.status == 200) {
+			      alert("Correo enviado!");
+			    }
+			  }; 
+			  xhttp.open("GET", "assets/mail/send.php?email="+email+"&name="+name+"&phone="+phone+"&message="+message, true);
+  			  xhttp.send();    
+	   } else {
+		alert("Favor completar todos los campos.");
+		}
+	      
+	});
 
 $(window).load(function(){
   $('#preloader').fadeOut('slow',function(){$(this).remove();});
